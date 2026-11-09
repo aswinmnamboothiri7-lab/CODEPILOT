@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 from django.contrib.auth.models import AbstractUser
+
 from django.db.models.signals import post_save
 
 class User(AbstractUser):
@@ -38,16 +39,13 @@ class StudentProfile(models.Model):
 
 
     
-def create_student_profile(sender,instance,created,**kwargs):
+def create_student_profile(sender, instance, created, **kwargs):
 
-    if created and not instance.is_superuser:
+    if created and instance.role == "student":
 
-        StudentProfile.objects.create(user=instance)
-
+        StudentProfile.objects.create(student=instance)
 
 post_save.connect(create_student_profile,User)
-
-
 
 
 

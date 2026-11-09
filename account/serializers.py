@@ -14,9 +14,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 class StudentSerilaizer(serializers.ModelSerializer):
 
-    model = User
 
-    fields =["__all__"]
+    class Meta:
+   
 
-    read_only_fields =["id","student","created_at","updated_at"]
+        model = User
+
+        fields =["__all__"]
+
+        read_only_fields =["id","student","created_at","updated_at"]
 
